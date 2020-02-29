@@ -6,7 +6,6 @@ public class CheckAssertions {
     String str2 = "aaa";
     String str3 = "bbb";
 
-
     @Test
     public void test1() {
         Assert.assertEquals(str1, str2);

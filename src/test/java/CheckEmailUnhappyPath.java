@@ -1,12 +1,12 @@
-import org.testng.annotations.Test;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class CheckEmailUnhappyPath {
 
-    @DataProvider(name= "NegativeEmail")
-    public static Object [][] getNegativeEmail() {
-        return new Object [][] {
+    @DataProvider(name = "NegativeEmails")
+    public Object[][] getNegativeEmail() {
+        return new Object[][]{
                 {"__@mail.com"},
                 {"abC%~23@mail.com"},
                 {"aaabbbcccdddeee1111222333ABC@mail.com"},
@@ -18,13 +18,15 @@ public class CheckEmailUnhappyPath {
                 {"email@mail.c"},
                 {"email@mail"},
                 {""},
+                null,
+                {" "},
+                {"\t"},
         };
     }
 
-    @Test (dataProvider = "NegativeEmail")
+    @Test(dataProvider = "NegativeEmails")
     public void checkUnhappyEmailCase(String email) {
         boolean actualResult = Email.isEmailCorrect(email);
-        Assert.assertFalse(actualResult);
-
+        Assert.assertFalse(actualResult, "Email " + email + " is valid");
     }
 }
